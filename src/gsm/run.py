@@ -97,6 +97,9 @@ if __name__ == "__main__":
     else:
         import argparse
         args = argparse.ArgumentParser()
+         parser.add_argument("--engine_path", type=str, default=None, 
+                        help="Path to the local language model to be used as ENGINE.")
+                        
         args.add_argument("--gsm_task_file", type=str, default="data/tasks/gsm/gsm.jsonl")
         args.add_argument("--max_attempts", type=int, default=4)
         args.add_argument("--outfile", type=str, default="data/tasks/gsm/gsm_outputs.jsonl")
