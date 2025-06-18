@@ -1,8 +1,8 @@
 import pandas as pd
 # from src.utils import Prompt
-from utils import Prompt, retry_parse_fail_prone_cmd
-
-from prompt_lib.backends import openai_api
+from utils import Prompt, retry_parse_fail_prone_cmd, ENGINE_PATH
+from ..backends.local_llm_api import LocalHFAPIWrapper
+# from prompt_lib.backends import openai_api
 
 
 class GSMInit(Prompt):
@@ -48,9 +48,10 @@ class GSMInit(Prompt):
 
 
 def test():
+    
     task_init = GSMInit(
         prompt_examples="data/prompt/gsm/init.txt",
-        engine="code-davinci-002",
+        engine=ENGINE_PATH,
         temperature=0.0,
     )
 

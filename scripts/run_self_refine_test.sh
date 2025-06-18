@@ -16,8 +16,8 @@
 #     echo "用法示例: bash scripts/run_self_refine_test.sh /path/to/your/model"
 # fi
 
-MY_LOCAL_MODEL_PATH="/data/ebay-lvs-a100/notebooks/zzhang12/model_cache/mistralai--Mistral-7B-Instruct-v0.3" # <--- 请修改这里！
-
+MY_LOCAL_MODEL_PATH="/data/ebay-slc-h200/notebooks/zzhang12/model_cache/Qwen--Qwen2.5-72B-Instruct" # <--- 请修改这里！
+MODEL_NAME="Qwen2.5-72B-Instruct"
 # --- 检查模型路径是否存在 (可选但推荐) ---
 if [ ! -d "$MY_LOCAL_MODEL_PATH" ]; then
     echo "错误: 在脚本中指定的模型路径 '$MY_LOCAL_MODEL_PATH' 不存在或不是一个目录。"
@@ -35,6 +35,17 @@ export PYTHONPATH="$PROJECT_ROOT:$PROJECT_ROOT/src:$PYTHONPATH"
 # --- 进入项目根目录 ---
 cd "$PROJECT_ROOT" || { echo "错误: 无法进入项目根目录 $PROJECT_ROOT"; exit 1; }
 
+
+# Create organized logs directory structure
+LOGS_BASE_DIR="$PROJECT_ROOT/logs"
+CATEGORY_NAME="gsm"
+LOGS_DATA_DIR="$LOGS_BASE_DIR/$CATEGORY_NAME"
+mkdir -p "$LOGS_DATA_DIR"
+
+# Create timestamped log file
+TIMESTAMP=$(date +%Y%m%d_%H%M%S)
+LOG_FILE="$LOGS_DATA_DIR/${CATEGORY_NAME}_${MODEL_NAME}_${TIMESTAMP}.log"
+
 # --- 执行命令 ---
 echo "项目根目录: $PROJECT_ROOT"
 echo "PYTHONPATH: $PYTHONPATH"
@@ -42,8 +53,11 @@ echo "将使用模型: $MY_LOCAL_MODEL_PATH"
 echo "正在执行: python src/gsm/run.py test --engine_path \"$MY_LOCAL_MODEL_PATH\""
 echo "-----------------------------------------------------"
 
-python src/gsm/run.py test --engine_path "$MY_LOCAL_MODEL_PATH"
-
+nohup python src/gsm/run.py --engine_path "$MY_LOCAL_MODEL_PATH" \
+                            --debug_mode \
+                            --model_name "$MODEL_NAME" \
+                            > "$LOG_FILE" 2>&1 &
+ 
 # 检查上一个命令的退出状态
 if [ $? -eq 0 ]; then
     echo "Python脚本成功执行完毕。"

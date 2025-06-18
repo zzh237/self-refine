@@ -3,8 +3,10 @@ import json
 import torch
 import numpy as np
 import random
-from typing import List, Dict, Any
+from typing import List, Dict, Any, Tuple
 import traceback
+
+ENGINE_PATH = "/data/ebay-slc-h200/notebooks/zzhang12/model_cache/deepseek-ai--DeepSeek-R1-0528"
 
 class Prompt:
     def __init__(

@@ -1,8 +1,8 @@
 import pandas as pd
-from prompt_lib.backends import openai_api
-
+# from prompt_lib.backends import openai_api
+from ..backends.local_llm_api import LocalHFAPIWrapper
 # from src.utils import Prompt
-from utils import Prompt, retry_parse_fail_prone_cmd
+from utils import Prompt, retry_parse_fail_prone_cmd,ENGINE_PATH
 
 
 class GSMFeedback(Prompt):
@@ -28,7 +28,7 @@ class GSMFeedback(Prompt):
         generation_query = self.make_query(solution=solution)
         print(generation_query)
         # print(1/0)
-        output = openai_api.OpenaiAPIWrapper.call(
+        output = LocalHFAPIWrapper.call(
             prompt=generation_query,
             engine=self.engine,
             max_tokens=self.max_tokens,
@@ -37,7 +37,7 @@ class GSMFeedback(Prompt):
         )
         
         
-        entire_output = openai_api.OpenaiAPIWrapper.get_first_response(output)
+        entire_output = LocalHFAPIWrapper.get_first_response(output)
         print(entire_output)
         if "### END" in entire_output:
             entire_output = entire_output.split("### END")[0]
@@ -70,7 +70,7 @@ class GSMFeedback(Prompt):
 def test():
     task_fb = GSMFeedback(
         prompt_examples="data/prompt/gsm/pal/feedback.txt",
-        engine="gpt-3.5-turbo",
+        engine=ENGINE_PATH,
         temperature=0.7,
     )
 
