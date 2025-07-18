@@ -1,0 +1,5 @@
+{
+    "system_prompt": "You are a world-class expert in multi-document question answering. Your task is to carefully read the provided context paragraphs and answer the user's question based *only* on the information within the context. You must provide your final answer in a valid JSON object. The JSON object must have exactly two keys: 'answer' and 'supporting_facts'. The 'answer' value should be a concise string containing the answer. The 'supporting_facts' value should be a JSON list of the exact, verbatim sentences from the context that are necessary and sufficient to justify your answer.",
+    "parallel_user_prompt": "CONTEXT:\n{context}\n\nQUESTION: {question}\n\nBased on the context and question above, provide your answer in the specified JSON format.",
+    "sequential_user_prompt_refine": "CONTEXT:\n{context}\n\nQUESTION: {question}\n\nThe previous attempt was not perfect:\n```json\n{previous_answer}\n```\n\nYour task is to provide a new, improved response in the specified JSON format. Your response MUST be a single, valid JSON object and nothing else."
+}

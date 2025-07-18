@@ -133,3 +133,12 @@ dmypy.json
 # Pyre type checker
 .pyre/
 out-responsegen.json
+
+
+
+self-refine/data/
+# self-refine/results/
+# self-refine/logs/
+self-refine/docs/
+self-refine/LOGS_BASE_DIR/
+self-refine/notebooks/

@@ -1,0 +1,41 @@
+# configs/config.yaml
+
+# Default model configuration
+model:
+  name: "Llama-3.3-70B-Instruct"
+  # Path to the locally cached model weights
+  cache_path: "/data/ebay-slc-h200/notebooks/zzhang12/model_cache/meta-llama--Llama-3.3-70B-Instruct"
+  # Low temperature for deterministic reasoning
+  temperature: 0.1
+  # Default max tokens per generation step
+  max_tokens: 1024
+  # Tensor parallel size for efficient inference
+  tensor_parallel_size: 2
+
+# Path configuration
+# The '???' values are placeholders that Hydra will resolve.
+paths:
+  project_root:???
+  data_dir: "${paths.project_root}/data"
+  log_dir: "${paths.project_root}/logs"
+  results_dir: "${paths.project_root}/results"
+  prompt_dir: "${paths.project_root}/prompts"
+
+# Experiment-specific parameters to be defined in separate files
+# These are required fields for any experiment config.
+dataset:
+  name:??? # e.g., math, hotpotqa, musique
+  split: "test" # or "dev"
+
+strategy:
+  name:??? # 'parallel' or 'sequential'
+  # Number of parallel samples or sequential refinement steps
+  n_samples: 8
+
+# Total token budget for a single problem instance
+compute_budget:??? # e.g., 4096
+
+# Debugging flags
+debug:
+  is_enabled: false
+  sample_size: 10

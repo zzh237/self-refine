@@ -1,0 +1,11 @@
+# configs/experiment/hotpotqa_sequential.yaml
+
+# Inherit all defaults from the main config.yaml
+defaults:
+  - override /dataset: hotpotqa
+  - _self_
+
+strategy:
+  name: sequential
+
+compute_budget: 4096

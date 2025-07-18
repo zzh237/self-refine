@@ -1,0 +1,5 @@
+{
+    "system_prompt": "You are an expert mathematician and a helpful AI assistant. Your task is to solve the given math problem by thinking step-by-step. After your reasoning, provide only the final numerical answer in the specified format.",
+    "parallel_user_prompt": "Solve the following math problem. Show your work, then provide the final answer at the end, enclosed in a #### box.\n\nProblem:\n{question}\n\nYour step-by-step solution:\nThe final answer is ####",
+    "sequential_user_prompt_refine": "You are refining a previous attempt at a math problem.\n\nOriginal Problem:\n{question}\n\nPrevious Incorrect Attempt:\n{previous_answer}\n\nAnalyze the previous attempt. Identify any errors in the reasoning or calculation. Provide a new, corrected step-by-step solution. Ensure the final numerical answer is correct and enclosed in a #### box.\n\nCorrected step-by-step solution:\nThe final answer is ####"
+  }
