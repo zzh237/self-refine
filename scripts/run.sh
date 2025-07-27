@@ -88,10 +88,10 @@ echo "====================================================="
 
 
 DEBUG_MODE_ENABLED="false"
-declare -a DATASETS=("hotpotqa")
-declare -a STRATEGIES=("parallel-rrm")
-declare -a BUDGETS=(4096 8192)
-declare -a N_SAMPLES=(4 8 16 32)
+declare -a DATASETS=("2wikimultihopqa")
+declare -a STRATEGIES=("sequential")
+declare -a BUDGETS=(4096)
+declare -a N_SAMPLES=(32)
 
 for dataset in "${DATASETS[@]}"; do
   for strategy in "${STRATEGIES[@]}"; do
